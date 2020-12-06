@@ -1,0 +1,19 @@
+[Unit]
+Description=Wishareprotector is a program that protects Wishare from malware attacks
+
+[Service]
+Type=simple
+
+User=root
+Group=root
+UMask=007
+
+# Replacements required in the line below (see INSTALL.txt)
+ExecStart=/home/scaleweb/websites/wishareprotect/wp_venv/bin/python3 /home/scaleweb/websites/wishareprotect/main.py --config /home/scaleweb/websites/wishareprotect/config.ini.sample
+Restart=on-failure
+
+# Configures the time to wait before service is stopped forcefully.
+TimeoutStopSec=300
+
+[Install]
+WantedBy=multi-user.target

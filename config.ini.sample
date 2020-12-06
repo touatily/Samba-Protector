@@ -1,0 +1,45 @@
+[variables]
+# global varibales
+samba_logfile=/var/log/samba_audit.log
+logfile=/var/log/WishareProtector.log
+monitoring_email=lyes.touati@withings.com
+# log level : DEBUG, INFO, WARNING, ERROR, CRITICAL
+log_level=DEBUG
+
+# STMP Configuration
+smtp_host=mta.corp.withings.com
+smtp_port=25
+
+# Listening server
+syslog_IP=127.0.0.1
+syslog_port=524
+
+[policies]
+# policies are described here
+POLICY_READ_WRITE={
+    "name":"policy 1",
+    "description":"description 1",
+    "type":"POLICY_NB_OPERATIONS",
+    "details":[
+      {
+        "type":"read",
+        "threshold":2,
+        "period":60
+      },
+      {
+        "type":"write",
+        "threshold":1,
+        "period":60
+      }
+    ]
+  }
+
+# in type 2 policy, "ops" means operations and it accpets values :
+# "w", "r", "d", "w/r", "w/r/d", "w/d", "r/d"
+POLICY_PATTERN_WITHINGS={
+    "name":"policy 2",
+    "description":"description 2",
+    "type":"POLICY_FILENAME_PATTERN",
+    "pattern":"^.*\\.withings$",
+    "ops":"w/r/d"
+  }
